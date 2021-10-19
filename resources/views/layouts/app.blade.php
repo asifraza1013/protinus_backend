@@ -12,7 +12,7 @@
     <meta name="author" content="GetBootstrap, design by: puffintheme.com">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ (isset($title)) ? $titl : '' }} Protinus Admin</title>
+    <title>{{ (isset($title)) ? $title : '' }} Protinus Admin</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,22 +20,24 @@
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assets/vendor/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets//assets/vendor/animate-css/vivify.min.css') }}">
+    <link rel="stylesheet" href="{{ baseurl('assets//assets/vendor/animate-css/vivify.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets//assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/sweetalert/sweetalert.css') }}"/>
-
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/c3/c3.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/chartist/css/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
+        href="{{ baseurl('assets/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ baseurl('assets//assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/sweetalert/sweetalert.css') }}" />
+
+    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/c3/c3.min.css') }}" />
+    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/chartist/css/chartist.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ baseurl('assets/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ baseurl('assets/css/site.min.css') }}">
 </head>
 
 <body class="theme-blue">
@@ -59,22 +61,36 @@
     </div>
     <!-- Javascript -->
     <!-- Latest jQuery -->
-    <script src="{{ asset('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ baseurl('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
     <!-- Bootstrap 4x JS  -->
-    <script src="{{ asset('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ baseurl('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
+    <script src="{{ baseurl('assets/bundles/vendorscripts.bundle.js') }}"></script>
 
-    <script src="{{ asset('assets/bundles/c3.bundle.js') }}"></script>
-    <script src="{{ asset('assets/bundles/flotscripts.bundle.js') }}"></script><!-- flot charts Plugin Js -->
-    <script src="{{ asset('assets/bundles/knob.bundle.js') }}"></script>
+    <script src="{{ baseurl('assets/bundles/c3.bundle.js') }}"></script>
+    <script src="{{ baseurl('assets/bundles/flotscripts.bundle.js') }}"></script><!-- flot charts Plugin Js -->
+    <script src="{{ baseurl('assets/bundles/knob.bundle.js') }}"></script>
 
     <!-- Project Common JS -->
-    <script src="{{ asset('assets/bundles/chartist.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/charts/chartjs.js') }}"></script>
-    <script src="{{ asset('assets/js/common.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script src="{{ baseurl('assets/bundles/chartist.bundle.js') }}"></script>
+    <script src="{{ baseurl('assets/js/pages/charts/chartjs.js') }}"></script>
+    <script src="{{ baseurl('assets/js/common.js') }}"></script>
+    <script src="{{ baseurl('assets/js/index.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+        jQuery(function($) {
+            $('#left-sidebar li').removeClass('active');
+                var path = window.location.href;
+                $('#left-sidebar li a').each(function() {
+                    if (this.href === path) {
+                        $(this).closest('li').addClass('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

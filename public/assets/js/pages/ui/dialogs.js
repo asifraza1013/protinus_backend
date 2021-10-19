@@ -1,3 +1,7 @@
+//  if("{{ Session::get('success') }}"){
+// }
+$('.js-sweetalert').trigger('click');
+
 $(function () {
     $('.js-sweetalert').on('click', function () {
         var type = $(this).data('type');
