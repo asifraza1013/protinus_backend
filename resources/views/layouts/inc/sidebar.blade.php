@@ -35,13 +35,29 @@
                             <a href="{{ route('admin.admin.list') }}"><i class="fa fa-lock"></i><span>Admin</span></a>
                         </li>
                         <li class="">
+                            <a href="#"><i class="fa fa-database"></i><span>Developers</span></a>
+                            <ul class="drop">
+                                <li class="">
+                                    <a href="{{ route('developer.index') }}"><i class="fa fa-database"></i><span>Developers</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- <li class="">
                             <a href="{{ route('developer.index') }}"><i class="fa fa-database"></i><span>Developers</span></a>
-                        </li>
+                        </li> --}}
                         <li class="">
-                            <a href="{{ route('category.index') }}"><i class="fa fa-bars"></i><span>Category</span></a>
-                        </li>
-                        <li class="">
-                            <a href="{{ route('subcategory.index') }}"><i class="fa fa-bars"></i><span>Sub Category</span></a>
+                            <a href="#" class="has-arrow"><i class="fa fa-search"></i><span>Category</span></a>
+                            <ul class="drop">
+                                <li class="">
+                                <a href="{{ route('category.index') }}"><i class="fa fa-bars"></i><span>Category</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('subcategory.index') }}"><i class="fa fa-bars"></i><span>Sub Category</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="">
                             <a href="{{ route('notifications.index') }}"><i class="fa fa-bell"></i><span>Notifications</span></a>
@@ -55,8 +71,33 @@
                         <li class="">
                             <a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i><span>Products</span></a>
                         </li>
-                        <li class="">
+                        {{-- <li class="">
                             <a href="{{ route('roomtemplate.index') }}"><i class="fa fa-address-card"></i><span>Room Templates</span></a>
+                        </li> --}}
+                        <li class="">
+                            <a href="#"><i class="fa fa-address-card"></i><span>Room Templates</span></a>
+                            <ul class="drop">
+                                <li class="">
+                                    <a href="{{ route('roomtemplate.index') }}"><i class="fa fa-address-card"></i><span>Room Templates</span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-bars"></i><span>Transactions</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- <li class="">
+                            <a href="{{ route('subscription.index') }}"><i class="fa fa-search"></i><span>Subscriptions</span></a>
+                        </li> --}}
+                        <li class="">
+                            <a href="#"><i class="fa fa-search"></i><span>Subscriptions</span></a>
+                            <ul class="drop">
+                                <li class="">
+                                    <a href="{{ route('subscription.index') }}"><i class="fa fa-search"></i><span>Subscriptions</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('subscription.transactions') }}"><i class="fa fa-search"></i><span>Transactions</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="">
                             <a href="{{ route('reviewrating.index') }}"><i class="fa fa-search"></i><span>Rating & Reviews</span></a>

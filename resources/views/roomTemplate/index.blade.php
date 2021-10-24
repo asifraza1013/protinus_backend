@@ -50,7 +50,11 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $room->userName->userName }}</td>
-                                            <td>{{ $room->roomName }}</td>
+                                            <td>
+                                                <a href="{{ route('room.tempate.transactions.index', $room->productId) }}">
+                                                    {{ $room->roomName }}
+                                                </a>
+                                            </td>
                                             <td>{{ currency($room->price) }}</td>
                                             <td>{{ $room->type }}</td>
                                             <td>{{ isset($room->transactions) ? $room->transactions : '--' }}</td>

@@ -168,7 +168,7 @@
         </div>
     </div>
 </div>
-<script src="{{ baseurl('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 <script>
 
     $(document).ready(function () {

@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $title = 'Protinus Admin';
+        $response = sendRequest('POST', config('api_path.dashboard'));
+        $response = $response->data;
+        return view('dashboard', compact([
+            'title',
+            'response',
+        ]));
     }
 }

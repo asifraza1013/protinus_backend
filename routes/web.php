@@ -46,6 +46,8 @@ Route::group(['middleware' => ['authenticaion']], function () {
 
     Route::resource('developer', 'DeveloperController');
     Route::get('developer/delete/{id}', 'DeveloperController@deleteDeveloper')->name('developer.dlt');
+    Route::get('developers/payout', 'DeveloperTransactionsController@index')->name('developer.payout.index');
+
 
     Route::resource('category', 'CategoryController');
     Route::get('category/delete/{id}', 'CategoryController@deleteCategory')->name('category.dlt');
@@ -62,9 +64,20 @@ Route::group(['middleware' => ['authenticaion']], function () {
     Route::get('support/delete/{id}', 'SupportController@destroySupport')->name('support.dlt');
 
     Route::resource('product', 'ProductController');
+    Route::get('product/delete/{id}', 'ProductController@destroyProduct')->name('product.dlt');
 
     Route::resource('roomtemplate', 'RoomTemplateController');
     Route::get('roomtemplate/delete/{id}', 'RoomTemplateController@destroyTempalte')->name('roomtemplate.dlt');
 
     Route::resource('reviewrating', 'ReviewRatingController');
+
+
+    // Route::resource('roomtempaltetransactions', 'RoomTemplateTransactionsController');
+    Route::get('roomtempaltetransactions/{id}', 'RoomTemplateTransactionsController@index')->name('room.tempate.transactions.index');
+
+    Route::get('product/transaction/{id}', 'ProductTransactionsController@index')->name('product.transactions.index');
+
+    Route::resource('subscription', 'SubscriptionController');
+    Route::get('subscription/delete/{id}', 'SubscriptionController@destroySub')->name('subscription.dlt');
+    Route::get('subscriptions/transactions', 'SubscriptionTransactionsController@index')->name('subscription.transactions');
 });

@@ -60,7 +60,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $rules = [
             'user_name' => 'required|string',
             'product_name' => 'required|string',
@@ -77,7 +76,6 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            dd('here');
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
@@ -89,14 +87,21 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Please add correct data for attributes.')->withInput();
         }
         $productAttributes = [];
-        $attr_array = [];
-        $sku_array = [];
-        $quantity_array = [];
         foreach($attributes as $key=>$attr){
-            $productAttributes['productAttributes['.$key.']'] = [$attr, $quantity[$key], $sku[$key]];
+            $productAttributes['productAttributes'][$key] = [$attr, $quantity[$key], $sku[$key]];
         }
-        dd($request->all());
-
+        $productAttributes['userName'] = $request->user_name;
+        $productAttributes['productName'] = $request->product_name;
+        $productAttributes['price'] = $request->price;
+        $productAttributes['subCategory'] = $request->sub_category;
+        $productAttributes['productId'] = $request->product_id;
+        $productAttributes['productDescription'] = $request->prod_description;
+        $productAttributes['productImage'] = $request->images;
+        $response = sendRequest('POST', config('api_path.add_proudct'), $productAttributes);
+        if($response->status){
+            return redirect()->back()->with('success', $response->message);
+        }
+        return redirect()->back()->with('success', $response->message);
     }
 
     /**
@@ -118,7 +123,31 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edit/View Product';
+        $userList = sendRequest('POST', config('api_path.user_list'));
+        if(!$userList->status){
+            return redirect()->with('error', $userList->message);
+        }
+        $userList = $userList->user;
+
+        $subCateList = sendRequest('POST', config('api_path.subcategory_list'));
+        if(!$subCateList->status){
+            return redirect()->with('error', $userList->message);
+        }
+        $subCateList = $subCateList->data;
+
+        $data['productId'] = $id;
+        $product = sendRequest('POST', config('api_path.get_product'), $data);
+        if(!$product->status){
+            return redirect()->with('error', $userList->message);
+        }
+        $product = $product->data[0];
+        return view('product.edit', compact([
+            'product',
+            'subCateList',
+            'title',
+            'userList',
+        ]));
     }
 
     /**
@@ -130,7 +159,49 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'user_name' => 'required|string',
+            'product_name' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'sub_category' => 'required|string',
+            'product_id' => 'required|string',
+            'status' => 'required|string',
+            'prod_description' => 'required|string',
+            'attribute' => 'required|string',
+            'quantity' => 'required|string',
+            'sku' => 'required|string',
+            'images' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
+		}
+
+        // get attributes
+        $attributes = explode(',' ,$request->attribute);
+        $quantity = explode(',' ,$request->quantity);
+        $sku = explode(',' ,$request->sku);
+        if(count($attributes) != count($quantity) || count($attributes) != count($sku)){
+            return redirect()->back()->with('error', 'Please add correct data for attributes.')->withInput();
+        }
+        $productAttributes = [];
+        foreach($attributes as $key=>$attr){
+            $productAttributes['productAttributes'][$key] = [$attr, $quantity[$key], $sku[$key]];
+        }
+        $productAttributes['pId'] = $id;
+        $productAttributes['userName'] = $request->user_name;
+        $productAttributes['productName'] = $request->product_name;
+        $productAttributes['price'] = $request->price;
+        $productAttributes['subCategory'] = $request->sub_category;
+        $productAttributes['productId'] = $request->product_id;
+        $productAttributes['productDescription'] = $request->prod_description;
+        $productAttributes['productImage'] = $request->images;
+        $response = sendRequest('POST', config('api_path.update_product'), $productAttributes);
+        if($response->status){
+            return redirect()->back()->with('success', $response->message);
+        }
+        return redirect()->back()->with('success', $response->message);
     }
 
     /**
@@ -139,8 +210,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyProduct($id)
     {
-        //
+        $data['productId'] = $id;
+        $response = sendRequest('POST', config('api_path.delete_product'), $data);
+        if($response->status){
+            return redirect()->back()->with('success', $response->message);
+        }
+        return redirect()->back()->with('success', $response->message);
     }
 }

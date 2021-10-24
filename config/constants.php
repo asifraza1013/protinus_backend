@@ -27,6 +27,10 @@ return [
         'Pending' => 'Pending',
         'Resolved' => 'Resolved',
     ],
+    'online_template_access' => [
+        'Free Templates Only' => 'Free Templates Only',
+        'Paid Tempaltes Only' => 'Paid Tempaltes Only',
+    ],
 
 
 ];

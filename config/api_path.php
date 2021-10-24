@@ -21,6 +21,7 @@ return [
     'get_developer' => 'developers/getDeveloperById',
     'update_developer' => 'developers/updateDeveloper',
     'delete_developer' => 'developers/deleteDeveloper',
+    'developer_transactions_list' => 'developerPayouts/getDeveloperPayout',
 
 
     'category_list' => 'categorys/getCategory',
@@ -71,6 +72,15 @@ return [
     'delete_room_template_transaction' => 'roomTemplates/deleteRoomTransaction',
 
     'review_rating_list' => 'ratingReviews/getRatingReview',
+
+    'dashboard' => 'dashboards/getDashboard',
+
+    'add_subscription' => 'subscriptions/addSubscription',
+    'subscription_list' => 'subscriptions/getSubscription',
+    'get_subscription' => 'subscriptions/getSubscriptionById',
+    'delete_subscription' => 'subscriptions/deleteSubscription',
+    'update_subscription' => 'subscriptions/updateSubscription',
+    'subscription_transactions_list' => 'subscriptions/getSubscriptionTransaction',
 ];
 
 ?>

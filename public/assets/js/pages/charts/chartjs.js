@@ -53,7 +53,7 @@ $(function () {
         axisX: {
             showGrid: false
         },
-        
+
         lineSmooth: false,
     };
     new Chartist.Line('#area-chart', data, options);
@@ -165,7 +165,7 @@ $(function () {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         series: [
             [200, 380, 320, 320, 410, 295, 570, 400, 555, 620, 750, 900],
-            [300, 180, 220, 120, 110, 495, 370, 600, 355, 120, 350, 700]
+            // [300, 180, 220, 120, 110, 495, 370, 600, 355, 120, 350, 700]
         ]
     };
     new Chartist.Bar('#horizontalbar-chart', dataHorizontalBar, {

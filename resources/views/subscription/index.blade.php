@@ -3,7 +3,7 @@
 <div class="block-header">
     <div class="row clearfix">
         <div class="col-md-6 col-sm-12">
-            <h1>Products</h1>
+            <h1>Subscription</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-cube"></i></a></li>
@@ -19,12 +19,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="header">
-                    <h2>Product List</h2>
+                    <h2>Subscription List</h2>
                     <ul class="header-dropdown dropdown">
 
                         <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
                         </li>
-                        <li><a href="{{ route('product.create') }}" class="btn btn-sm btn-primary text-white" title="">Add Product</a>
+                        <li><a href="{{ route('subscription.create') }}" class="btn btn-sm btn-primary text-white" title="">Add Subscription</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
@@ -35,29 +35,27 @@
                             <thead>
                                 <tr>
                                     <th>N.o</th>
-                                    <th>Username</th>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Transactions</th>
+                                    <th>Name</th>
+                                    <th>Monthly Prices</th>
+                                    <th>N.o Of Users</th>
+                                    <th>Staff</th>
+                                    <th>Unlimited Product</th>
+                                    <th>Products</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($products))
-                                    @foreach ($products as $key=>$prod)
+                                @if (count($subscriptions))
+                                    @foreach ($subscriptions as $key=>$prod)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $prod->userName->userName }}</td>
-                                            <td>
-                                                <a href="{{ route('product.transactions.index', $prod->_id) }}">
-                                                    {{ $prod->productName }}
-                                                </a>
-                                            </td>
-                                            <td>{{ currency($prod->price) }}</td>
-                                            <td>{{ '--' }}</td>
-                                            <td>{{ isset(($prod->transactions)) ? $prod->transactions : '--' }}</td>
+                                            <td>{{ $prod->name }}</td>
+                                            <td>{{ currency($prod->monthlyPrice) }}</td>
+                                            <td>{{ (isset($prod->noOfUsers)) ? $prod->noOfUsers : '--' }}</td>
+                                            <td>{{ $prod->staffAccountAvailable }}</td>
+                                            <td>{{ $prod->unlimitedProductsUpload }}</td>
+                                            <td>{{ $prod->noOfProductUpload }}</td>
                                             <td>
                                                 @if(isset($prod->status))
                                                 @if($prod->status == 'Active')
@@ -70,9 +68,9 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('product.edit', $prod->_id) }}"><i
+                                                <a href="{{ route('subscription.edit', $prod->_id) }}"><i
                                                         class="fa fa-edit text-primary"><span>Edit/View</span></i></a> <br>
-                                                <a href="{{ route('product.dlt', $prod->_id) }}">
+                                                <a href="{{ route('subscription.dlt', $prod->_id) }}">
                                                     <i class="fa fa-trash text-danger"><span class="text-danger">Delete</span></i>
                                                 </a>
                                             </td>

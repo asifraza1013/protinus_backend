@@ -23,7 +23,7 @@
             <div class="card box-shadow">
                 <div class="body text-left">
                     <i class="fa fa-shopping-cart text-primary fa-2x"></i>
-                    <h1>52</h1>
+                    <h1>{{ $response->allOrders }}</h1>
                     <h6 class="text-muted">Total Order</h6>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="card box-shadow">
                 <div class="body text-left">
                     <i class="fa fa-list text-warning fa-2x"></i>
-                    <h1>52</h1>
+                    <h1>{{ $response->allProduct }}</h1>
                     <h6 class="text-muted">Total Product</h6>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="card box-shadow">
                 <div class="body text-left">
                     <i class="fa fa-tv text-warning fa-2x"></i>
-                    <h1>52</h1>
+                    <h1>{{ $response->allCategory }}</h1>
                     <h6 class="text-muted">Total Category</h6>
                 </div>
             </div>
@@ -50,7 +50,7 @@
             <div class="card box-shadow">
                 <div class="body text-left">
                     <i class="fa fa-user text-success fa-2x"></i>
-                    <h1>52</h1>
+                    <h1>{{ $response->allUser }}</h1>
                     <h6 class="text-muted">Total Users</h6>
                 </div>
             </div>

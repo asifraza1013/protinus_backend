@@ -23,7 +23,6 @@ class RoomTemplateController extends Controller
                 'title',
             ]));
         }
-
     }
 
     /**

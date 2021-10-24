@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductTransactionsController extends Controller
+class RoomTemplateTransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,17 @@ class ProductTransactionsController extends Controller
      */
     public function index($id)
     {
-        $title = 'Product List';
+        $title = 'Get Room Template Transactions List';
         $data['productId'] = $id;
-        $response = sendRequest('POST', config('api_path.get_product_trasactions'), $data);
-        if(!$response->status){
-            return redirect()->back()->with('error', $response->message);
+        $response = sendRequest('POST', config('api_path.get_room_template_transaction'), $data);
+        dd($response);
+        if($response->status){
+            $room_templates = $response->data;
+            return view('roomTemplate.index', compact([
+                'room_templates',
+                'title',
+            ]));
         }
-        $transactions = $response->data;
-        return view('product.transactions.index', compact([
-            'transactions',
-            'title',
-        ]));
     }
 
     /**

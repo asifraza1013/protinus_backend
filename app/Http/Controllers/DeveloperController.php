@@ -140,4 +140,9 @@ class DeveloperController extends Controller
         }
         return redirect()->back()->with('error', $response->message);
     }
+
+
+    public function show($id)
+    {
+    }
 }

@@ -11,12 +11,12 @@
 
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <!-- VENDOR CSS -->
-<link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/font-awesome/css/font-awesome.min.css') }}">
-<link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/animate-css/vivify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/assets/vendor/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/assets/vendor/animate-css/vivify.min.css') }}">
 
 <!-- MAIN CSS -->
-<link rel="stylesheet" href="{{ baseurl('assets/css/site.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
 
 </head>
 
@@ -73,21 +73,21 @@
                     </ol>
                 <div class="carousel-inner pb-5">
                     <div class="carousel-item active">
-                        <img src="{{ baseurl('assets/assets/images/login-slide1.png') }}" class="img-fluid" alt="login page" />
+                        <img src="{{ asset('assets/assets/images/login-slide1.png') }}" class="img-fluid" alt="login page" />
                         <div class="px-4">
                             <h2>Protinus</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ baseurl('assets/assets/images/login-slide2.png') }}" class="img-fluid" alt="login page" />
+                        <img src="{{ asset('assets/assets/images/login-slide2.png') }}" class="img-fluid" alt="login page" />
                         <div class="px-4">
                             <h2>100% Secure</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ baseurl('assets/assets/images/login-slide2.png') }}" class="img-fluid" alt="login page" />
+                        <img src="{{ asset('assets/assets/images/login-slide2.png') }}" class="img-fluid" alt="login page" />
                         <div class="px-4">
                             <h2>Saving Time</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -101,12 +101,12 @@
     <!-- END WRAPPER -->
 
 <!-- Latest jQuery -->
-<script src="{{ baseurl('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
 <!-- Bootstrap 4x JS  -->
-<script src="{{ baseurl('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<script src="{{ baseurl('assets/bundles/vendorscripts.bundle.js') }}"></script>
-<script src="{{ baseurl('assets/js/common.js') }}"></script>
+<script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/common.js') }}"></script>
 </body>
 </html>

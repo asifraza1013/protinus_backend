@@ -46,16 +46,16 @@ class UserController extends Controller
         $response = sendRequest('POST', config('api_path.login'), $data);
         if($response->status){
             $user = (object)[
-                '_id' => $response->data->_id,
-                'userName' => $response->data->userName,
-                'email' => $response->data->email,
-                'status' => $response->data->status,
-                'subscriptionType' => $response->data->subscriptionType,
-                'accountType' => $response->data->accountType,
-                'employer' => $response->data->employer,
+                '_id' => $response->data->user->_id,
+                'userName' => $response->data->user->userName,
+                'email' => $response->data->user->email,
+                'status' => $response->data->user->status,
+                'subscriptionType' => $response->data->user->subscriptionType,
+                'accountType' => $response->data->user->accountType,
+                'employer' => $response->data->user->employer,
+                'token' => $response->data->token,
             ];
             Session::put('authentication', $user);
-
             return redirect(route('home'));
         }else{
             return redirect()->back()->with('error', $response->message);

@@ -20,24 +20,24 @@
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assets/vendor/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ baseurl('assets//assets/vendor/animate-css/vivify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets//assets/vendor/animate-css/vivify.min.css') }}">
 
-    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
-        href="{{ baseurl('assets/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}">
+        href="{{ asset('assets/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}">
     <link rel="stylesheet"
-        href="{{ baseurl('assets//assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/sweetalert/sweetalert.css') }}" />
+        href="{{ asset('assets//assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/sweetalert/sweetalert.css') }}" />
 
-    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/c3/c3.min.css') }}" />
-    <link rel="stylesheet" href="{{ baseurl('assets/assets/vendor/chartist/css/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/c3/c3.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/assets/vendor/chartist/css/chartist.min.css') }}">
     <link rel="stylesheet"
-        href="{{ baseurl('assets/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
+        href="{{ asset('assets/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{ baseurl('assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
 </head>
 
 <body class="theme-blue">
@@ -61,22 +61,29 @@
     </div>
     <!-- Javascript -->
     <!-- Latest jQuery -->
-    <script src="{{ baseurl('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
     <!-- Bootstrap 4x JS  -->
-    <script src="{{ baseurl('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ baseurl('assets/bundles/vendorscripts.bundle.js') }}"></script>
+    {{-- <script src="{{ asset('assets/assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script> --}}
 
-    <script src="{{ baseurl('assets/bundles/c3.bundle.js') }}"></script>
-    <script src="{{ baseurl('assets/bundles/flotscripts.bundle.js') }}"></script><!-- flot charts Plugin Js -->
-    <script src="{{ baseurl('assets/bundles/knob.bundle.js') }}"></script>
+    <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
 
-    <!-- Project Common JS -->
-    <script src="{{ baseurl('assets/bundles/chartist.bundle.js') }}"></script>
-    <script src="{{ baseurl('assets/js/pages/charts/chartjs.js') }}"></script>
-    <script src="{{ baseurl('assets/js/common.js') }}"></script>
-    <script src="{{ baseurl('assets/js/index.js') }}"></script>
+    <script src="{{ asset('assets/bundles/c3.bundle.js') }}"></script>
+    <script src="{{ asset('assets/bundles/flotscripts.bundle.js') }}"></script><!-- flot charts Plugin Js -->
+    <script src="{{ asset('assets/bundles/knob.bundle.js') }}"></script>
+
+    <script src="{{ asset('assets/js/common.js') }}"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+
+     <!-- Project Common JS -->
+     <script src="{{ asset('assets/bundles/chartist.bundle.js') }}"></script>
+     <script src="{{ asset('assets/js/pages/charts/chartjs.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -84,9 +91,17 @@
             $('#left-sidebar li').removeClass('active');
                 var path = window.location.href;
                 $('#left-sidebar li a').each(function() {
-                    if (this.href === path) {
+                    if(this.href == path && this.href != '#'){
+                        $(this).closest('ul li').addClass('active');
+                        $(this).attr('aria-expanded', true);
+                        $(this).closest('ul').attr('aria-expanded', true);
+                        $(this).closest('ul').addClass('in');
                         $(this).closest('li').addClass('active');
+                        $(this).closest('.has-arrow').attr("aria-expanded", "true");
                     }
+                    // if (this.href === path) {
+                    //     $(this).closest('li').addClass('active');
+                    // }
                 });
             });
         });
