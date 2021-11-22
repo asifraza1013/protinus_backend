@@ -3,29 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
-class RoomTemplateTransactionsController extends Controller
+class DeveloperEarningsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $title = 'Get Room Template Transactions List';
-        $data['userId'] = $id;
-        $response = sendRequest('POST', config('api_path.get_room_order_transactions'), $data);
-        if($response->status){
-            $room_templates = $response->data;
-            return view('roomTemplate.index', compact([
-                'room_templates',
-                'title',
-            ]));
+        $title = 'Developer earnings list';
+        $authentication = Session::get('authentication');
+        $userType = isset($authentication->accountType) ? $authentication->accountType : false;
+        if($userType && ($userType == 'Developer')){
+            $data['developerEarningId'] = $authentication->_id;
+            $response = sendRequest('POST', config('api_path.specific_developer_earnings_list'));
+        }else{
+            $response = sendRequest('POST', config('api_path.developer_earnings_list'));
         }
-        else{
-            return redirect()->back()->with('error', $response->message);
+        if(!$response->status){
+            $earnings = false;
         }
+        $earnings = $response->data;
+        return view('developer.earnings.index', compact([
+            'earnings',
+            'title',
+        ]));
     }
 
     /**

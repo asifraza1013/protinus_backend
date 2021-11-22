@@ -22,8 +22,8 @@
                     <h2>Users List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="{{ route('admin.user.create') }}" class="btn btn-sm btn-primary text-white" title="">Add User</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
@@ -51,7 +51,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $user->userName }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->subscriptionType }}</td>
+                                            <td>{{ (isset($user->subscriptionType)) ? $user->subscriptionType : '--' }}</td>
                                             <td>{{ $user->accountType }}</td>
                                             <td>
                                                 @if($user->status == 'Active')

@@ -3,7 +3,7 @@
 <div class="block-header">
     <div class="row clearfix">
         <div class="col-md-6 col-sm-12">
-            <h1>Notifications</h1>
+            <h1>Developer Earnings</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-cube"></i></a></li>
@@ -19,13 +19,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="header">
-                    <h2>Notifications List</h2>
+                    <h2>Developer Earnings List</h2>
                     <ul class="header-dropdown dropdown">
 
                         {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
                         </li> --}}
-                        <li><a href="{{ route('notifications.create') }}" class="btn btn-sm btn-primary text-white" title="">Add Notifications</a>
-                        </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
                 </div>
@@ -35,23 +33,29 @@
                             <thead>
                                 <tr>
                                     <th>N.o</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Title</th>
-                                    <th>Notificationss</th>
+                                    <th>Developer</th>
+                                    <th>Total Earnings</th>
+                                    <th>Total Payout</th>
+                                    <th>Remaining</th>
+                                    <th>N.o Of Transactions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($notifications))
-                                    @foreach ($notifications as $key=>$noti)
+                                @if ($earnings)
+                                    @foreach ($earnings as $key=>$user)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ date("Y-m-d",strtotime($noti->createdAt)) }}</td>
-                                            <td>{{ date("H:i:s",strtotime($noti->createdAt)) }}</td>
-                                            <td>{{ isset($noti->title) ? $noti->title : '' }}</td>
-                                            <td>{{ isset($noti->message) ? $noti->message : '' }}</td>
+                                            <td>{{ $user->developerName->userName }}</td>
+                                            <td>{{ currency($user->totalEarning) }}</td>
+                                            <td>{{ currency($user->totalPayout) }}</td>
+                                            <td>{{ currency($user->remaining) }}</td>
+                                           <td>{{ $user->noOfTransaction }}</td>
                                         </tr>
                                     @endforeach
+                                    @else
+                                    <tr class="text-center">
+                                        <td colspan="5">No Record Found</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

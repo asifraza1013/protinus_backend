@@ -47,7 +47,7 @@
                                            <select name="main_category" id="" class="form-control">
                                                <option value="" selected disabled>Select --</option>
                                                @foreach ($categryList as $key=>$item)
-                                                    <option value="{{ $item->_id }}" {{ ($subcate->mainCategory[0]->name) ? "selected" : '' }}>{{ $item->name }}</option>
+                                                    <option value="{{ $item->_id }}" {{ ($subcate->mainCategory == $item->_id) ? "selected" : '' }}>{{ $item->name }}</option>
                                                @endforeach
                                            </select>
                                         </div>

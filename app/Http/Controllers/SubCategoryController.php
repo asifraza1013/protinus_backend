@@ -59,11 +59,15 @@ class SubCategoryController extends Controller
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
+        if($request->file('image')){
+            $img = base64_encode(file_get_contents($request->image->path()));
+        }
+
         $data = [
             'name' => $request->name,
             'productType' => $request->prodcut_type,
             'mainCategory' => $request->main_category,
-            'image' => $request->image,
+            'image' => $img,
             'status' => $request->status,
         ];
         $response = sendRequest('POST', config('api_path.add_subcategory'), $data);
@@ -81,7 +85,15 @@ class SubCategoryController extends Controller
         $title = 'Edit sub category';
         $data['subCategoryId'] = $id;
         $response = sendRequest('POST', config('api_path.get_subcategory'), $data);
-        $subcate = $response->data[0];
+        if($response->status){
+            if(is_array($response->data)){
+                $subcate = $response->data[0];
+            }else{
+                $subcate = $response->data;
+            }
+        }else{
+            $subcate = null;
+        }
         $response = sendRequest('POST', config('api_path.category_list'));
         if(!$response->status){
             return redirect()->back()->with('error', $response->message);
@@ -115,12 +127,16 @@ class SubCategoryController extends Controller
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
+        if($request->file('image')){
+            $img = base64_encode(file_get_contents($request->image->path()));
+        }
+
         $data = [
             'subCategoryId' => $id,
             'name' => $request->name,
             'productType' => $request->prodcut_type,
             'mainCategory' => $request->main_category,
-            'image' => $request->image,
+            'image' => $img,
             'status' => $request->status,
         ];
         $response = sendRequest('POST', config('api_path.update_subcategory'), $data);

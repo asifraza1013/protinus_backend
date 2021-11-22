@@ -79,6 +79,13 @@ class ProductController extends Controller
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
+        $images = [];
+        if($request->file('images')){
+            foreach ($request->images as $key => $img) {
+                array_push($images, base64_encode(file_get_contents($img->path())));
+            }
+        }
+
         // get attributes
         $attributes = explode(',' ,$request->attribute);
         $quantity = explode(',' ,$request->quantity);
@@ -96,7 +103,7 @@ class ProductController extends Controller
         $productAttributes['subCategory'] = $request->sub_category;
         $productAttributes['productId'] = $request->product_id;
         $productAttributes['productDescription'] = $request->prod_description;
-        $productAttributes['productImage'] = $request->images;
+        $productAttributes['productImage'] = $images;
         $response = sendRequest('POST', config('api_path.add_proudct'), $productAttributes);
         if($response->status){
             return redirect()->back()->with('success', $response->message);
@@ -189,6 +196,14 @@ class ProductController extends Controller
         foreach($attributes as $key=>$attr){
             $productAttributes['productAttributes'][$key] = [$attr, $quantity[$key], $sku[$key]];
         }
+
+        $images = [];
+        if($request->file('images')){
+            foreach ($request->images as $key => $img) {
+                array_push($images, base64_encode(file_get_contents($img->path())));
+            }
+        }
+
         $productAttributes['pId'] = $id;
         $productAttributes['userName'] = $request->user_name;
         $productAttributes['productName'] = $request->product_name;
@@ -196,7 +211,7 @@ class ProductController extends Controller
         $productAttributes['subCategory'] = $request->sub_category;
         $productAttributes['productId'] = $request->product_id;
         $productAttributes['productDescription'] = $request->prod_description;
-        $productAttributes['productImage'] = $request->images;
+        $productAttributes['productImage'] = $images;
         $response = sendRequest('POST', config('api_path.update_product'), $productAttributes);
         if($response->status){
             return redirect()->back()->with('success', $response->message);

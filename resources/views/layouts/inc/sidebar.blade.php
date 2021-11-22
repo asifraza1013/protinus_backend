@@ -3,7 +3,7 @@
         <div class="navbar-left">
             <div class="navbar-brand">
                 <a class="small_menu_btn" href="javascript:void(0);"><i class="fa fa-list-alt"></i></a>
-                <a href="dashboard.html"><span class="bold">Protinus</span></a>
+                <a href="{{ route('home') }}"><span class="bold">Protinus</span></a>
             </div>
         </div>
 
@@ -18,12 +18,16 @@
         </div>
     </div>
 </nav>
-
+<?php
+    $auth = Session::get('authentication');
+    $userType = $auth->accountType;
+?>
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar_list">
         <div class="tab-content" id="main-menu">
             <div class="tab-pane active" id="Home-icon">
                 <nav class="sidebar-nav sidebar-scroll">
+                    @if ($userType == 'Admin')
                     <ul class="metismenu">
                         <li class="">
                             <a href="{{ route('home') }}"><i class="fa fa-home"></i><span>Dashboard</span></a>
@@ -42,6 +46,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('earnings.index') }}"><i class="fa fa-bars"></i><span>Earnings</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -103,6 +110,22 @@
                             <a href="{{ route('reviewrating.index') }}"><i class="fa fa-search"></i><span>Rating & Reviews</span></a>
                         </li>
                     </ul>
+                    @else
+                    <ul class="metismenu">
+                        <li>
+                            <a href="{{ route('roomtemplate.index') }}"><i class="fa fa-bars"></i><span>Room Template</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('earnings.index') }}"><i class="fa fa-bars"></i><span>Earnings</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('developer.edit', $auth->_id) }}"><i class="fa fa-bars"></i><span>Profile</span></a>
+                        </li>
+                    </ul>
+                    @endif
                 </nav>
             </div>
         </div>

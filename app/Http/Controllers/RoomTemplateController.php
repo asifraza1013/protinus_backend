@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RoomTemplateController extends Controller
@@ -15,14 +16,23 @@ class RoomTemplateController extends Controller
     public function index()
     {
         $title = 'Get Room Template List';
-        $response = sendRequest('POST', config('api_path.room_template_list'));
+        $authentication = Session::get('authentication');
+        $userType = isset($authentication->accountType) ? $authentication->accountType : false;
+        if($userType == 'Developer'){
+            $data['userId'] = $authentication->_id;
+            $response = sendRequest('POST', config('api_path.room_template_list'), $data);
+        }else{
+            $response = sendRequest('POST', config('api_path.room_template_list'));
+        }
         if($response->status){
             $room_templates = $response->data;
-            return view('roomTemplate.index', compact([
-                'room_templates',
-                'title',
-            ]));
+        }else{
+            $room_templates = null;
         }
+        return view('roomTemplate.index', compact([
+            'room_templates',
+            'title',
+        ]));
     }
 
     /**
@@ -33,12 +43,17 @@ class RoomTemplateController extends Controller
     public function create()
     {
         $title = 'Create New Room Template';
-        $userList = sendRequest('POST', config('api_path.user_list'));
-        if(!$userList->status){
-            return redirect()->with('error', $userList->message);
+        $authentication = Session::get('authentication');
+        $userType = isset($authentication->accountType) ? $authentication->accountType : false;
+        $userList = false;
+        $userid = $authentication->_id;
+        if($userType == 'Admin'){
+            $userList = sendRequest('POST', config('api_path.developer_list'));
+            if(!$userList->status){
+                return redirect()->with('error', $userList->message);
+            }
+            $userList = $userList->developer;
         }
-        $userList = $userList->user;
-
         $subCateList = sendRequest('POST', config('api_path.subcategory_list'));
         if(!$subCateList->status){
             return redirect()->with('error', $userList->message);
@@ -54,6 +69,7 @@ class RoomTemplateController extends Controller
             'products',
             'subCateList',
             'title',
+            'userid',
             'userList',
         ]));
     }
@@ -84,6 +100,10 @@ class RoomTemplateController extends Controller
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
+        if($request->file('image')){
+            $img = base64_encode(file_get_contents($request->image->path()));
+        }
+
         $data = [
             'userName' => $request->user_name,
             'roomName' => $request->room_name,
@@ -91,8 +111,8 @@ class RoomTemplateController extends Controller
             'price' => $request->price,
             'subCategory' => $request->sub_category,
             'productId' => $request->product_id,
-            'productDescription' => $request->prod_description,
-            'roomImage' => $request->roomImage,
+            'productDescription' => $request->product_description,
+            'roomImage' => $request->image,
         ];
 
         $response = sendRequest('POST', config('api_path.add_room_template'), $data);
@@ -124,11 +144,18 @@ class RoomTemplateController extends Controller
         $title = 'Edit Room Template';
         $data['roomId'] = $id;
 
-        $userList = sendRequest('POST', config('api_path.user_list'));
-        if(!$userList->status){
-            return redirect()->with('error', $userList->message);
+        $authentication = Session::get('authentication');
+
+        $userType = isset($authentication->accountType) ? $authentication->accountType : false;
+        $userList = false;
+        $userid = $authentication->_id;
+        if($userType == 'Admin'){
+            $userList = sendRequest('POST', config('api_path.developer_list'));
+            if(!$userList->status){
+                return redirect()->with('error', $userList->message);
+            }
+            $userList = $userList->developer;
         }
-        $userList = $userList->user;
 
         $subCateList = sendRequest('POST', config('api_path.subcategory_list'));
         if(!$subCateList->status){
@@ -150,6 +177,7 @@ class RoomTemplateController extends Controller
                 'subCateList',
                 'template',
                 'userList',
+                'userid',
             ));
         }
         return redirect()->back()->with('error', $response->message);
@@ -181,6 +209,10 @@ class RoomTemplateController extends Controller
         if ($validator->fails()) {
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
+
+        if($request->file('image')){
+            $img = base64_encode(file_get_contents($request->image->path()));
+        }
 
         $data = [
             'userName' => $request->user_name,
@@ -214,5 +246,24 @@ class RoomTemplateController extends Controller
             return redirect()->back()->with('success', $response->message);
         }
         return redirect()->back()->with('error', $response->message);
+    }
+
+    /**
+     * get room template transactions
+     */
+    public function getRoomTempalteTransactions($id = null)
+    {
+        if($id){
+            $data['userId'] = $id;
+            $response = sendRequest('POST', config('api_path.get_room_order_transactions'), $data);
+            dd($response);
+            if($response->status){
+                return redirect()->back()->with('success', $response->message);
+            }
+            return redirect()->back()->with('error', $response->message);
+        }
+        else{
+            return redirect()->back()->with('error', 'Opps! Nothing found. Please try agian with correct data!');
+        }
     }
 }

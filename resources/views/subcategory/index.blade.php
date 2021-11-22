@@ -23,8 +23,8 @@
                     <h2>Subcategory List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="{{ route('subcategory.create') }}" class="btn btn-sm btn-primary text-white" title="">Add</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
@@ -50,7 +50,18 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ isset($user->productType) ? $user->productType : '--' }}</td>
-                                            <td>{{ (count($user->mainCategory)) ? $user->mainCategory[0]->name : '--' }}</td>
+
+                                            <td>
+                                                @if(!is_null($user->mainCategory))
+                                                @if(is_array($user->mainCategory))
+                                                {{ $user->mainCategory[0]->name }}
+                                                @else
+                                                {{ $user->mainCategory->name }}
+                                                @endif
+                                                @else
+                                                --
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if(isset($user->status))
                                                 @if($user->status == 'Active')

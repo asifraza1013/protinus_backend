@@ -23,6 +23,7 @@
                         <form action="{{ route('roomtemplate.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row clearfix">
+                                @if($userList)
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <div class="form-group">
@@ -36,6 +37,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <input type="hidden" name="user_name" value="{{ $userid }}">
+                                @endif
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <div class="form-group">

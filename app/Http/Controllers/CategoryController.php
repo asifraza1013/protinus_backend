@@ -52,10 +52,15 @@ class CategoryController extends Controller
 			return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
 		}
 
+        if($request->file('image')){
+            $img = base64_encode(file_get_contents($request->image->path()));
+        }
+
         $data = [
             'name' => $request->name,
             'productType' => $request->prodcut_type,
-            'image' => $request->image,
+            'status' => $request->status,
+            'image' => $img,
         ];
         $response = sendRequest('POST', config('api_path.add_category'), $data);
         if($response->status){

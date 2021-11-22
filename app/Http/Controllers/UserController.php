@@ -50,12 +50,14 @@ class UserController extends Controller
                 'userName' => $response->data->user->userName,
                 'email' => $response->data->user->email,
                 'status' => $response->data->user->status,
-                'subscriptionType' => $response->data->user->subscriptionType,
                 'accountType' => $response->data->user->accountType,
-                'employer' => $response->data->user->employer,
                 'token' => $response->data->token,
             ];
+
             Session::put('authentication', $user);
+            if($response->data->user->accountType == 'Developer'){
+                return redirect(route('earnings.index'));
+            }
             return redirect(route('home'));
         }else{
             return redirect()->back()->with('error', $response->message);
