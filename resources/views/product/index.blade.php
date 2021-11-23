@@ -22,8 +22,8 @@
                     <h2>Product List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="{{ route('product.create') }}" class="btn btn-sm btn-primary text-white" title="">Add Product</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>

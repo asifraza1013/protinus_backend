@@ -22,8 +22,8 @@
                     <h2>Subscription List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="{{ route('subscription.create') }}" class="btn btn-sm btn-primary text-white" title="">Add Subscription</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>

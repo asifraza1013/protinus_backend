@@ -22,13 +22,14 @@
                     <h2>Room Templates List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a> --}}
                         </li>
                         <li><a href="{{ route('roomtemplate.create') }}" class="btn btn-sm btn-primary text-white" title="">Add</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
                 </div>
+                @include('msg.flash_message')
                 <div class="body">
                     <div class="table-responsive">
                         <table class="table table-hover js-basic-example dataTable">
@@ -45,13 +46,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($room_templates))
+                                @if (!is_null($room_templates) && count($room_templates))
                                     @foreach ($room_templates as $key=>$room)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $room->userName->userName }}</td>
                                             <td>
-                                                <a href="{{ route('room.tempate.transactions.index', $room->productId) }}">
+                                                <a href="{{ route('room.tempate.transactions.index', $room->userName->_id) }}">
                                                     {{ $room->roomName }}
                                                 </a>
                                             </td>
@@ -80,6 +81,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                <tr class="text-center">
+                                    <td colspan="8">No Record Found!</td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>

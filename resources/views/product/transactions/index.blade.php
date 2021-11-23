@@ -22,8 +22,8 @@
                     <h2>Product Transactions List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
                 </div>

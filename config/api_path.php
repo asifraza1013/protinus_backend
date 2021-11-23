@@ -22,6 +22,8 @@ return [
     'update_developer' => 'developers/updateDeveloper',
     'delete_developer' => 'developers/deleteDeveloper',
     'developer_transactions_list' => 'developerPayouts/getDeveloperPayout',
+    'developer_earnings_list' => 'developerEarnings/getdeveloperEarning',
+    'specific_developer_earnings_list' => 'developerEarnings/getdeveloperEarningById',
 
 
     'category_list' => 'categorys/getCategory',
@@ -70,6 +72,7 @@ return [
     'update_room_template_transaction' => 'roomTemplates/updateRoomTransaction',
     'get_room_template_transaction' => 'roomTemplates/getRoomTransactionById',
     'delete_room_template_transaction' => 'roomTemplates/deleteRoomTransaction',
+    'get_room_order_transactions' => 'orders/getUserOrders',
 
     'review_rating_list' => 'ratingReviews/getRatingReview',
 

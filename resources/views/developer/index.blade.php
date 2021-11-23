@@ -22,8 +22,8 @@
                     <h2>Users List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="{{ route('developer.create') }}" class="btn btn-sm btn-primary text-white" title="">Add User</a>
                         </li>
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
@@ -53,8 +53,8 @@
                                             <td>{{ $user->userName }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ isset(($user->template)) ? $user->template : '--' }}</td>
-                                            <td>{{ $user->bankName }}</td>
-                                            <td>{{ $user->accountNumber }}</td>
+                                            <td>{{ isset($user->bankName) ? $user->bankName : '--' }}</td>
+                                            <td>{{ isset($user->accountNumber) ? $user->accountNumber : '--' }}</td>
                                             <td>
                                                 @if($user->status == 'Active')
                                                 <span class="badge badge-success">{{ $user->status }}</span>

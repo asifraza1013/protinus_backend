@@ -22,8 +22,8 @@
                     <h2>Subscription Transactions List</h2>
                     <ul class="header-dropdown dropdown">
 
-                        <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
-                        </li>
+                        {{-- <li><a href="javascript:void(0);" class="btn btn-sm btn-primary text-white" title="">Export</a>
+                        </li> --}}
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
                 </div>
@@ -48,7 +48,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $prod->name->userName }}</td>
-                                            <td>{{ $prod->subscriptionPlan }}</td>
+                                            <td>{{ $prod->subscriptionPlan->name }}</td>
                                             <td>{{ $prod->startDate }}</td>
                                             <td>{{ $prod->startTime }}</td>
                                             <td>{{ (isset($prod->expirationDate)) ? $prod->expirationDate : '--'  }}</td>
