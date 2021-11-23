@@ -29,6 +29,7 @@
                         <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
                     </ul>
                 </div>
+                @include('msg.flash_message')
                 <div class="body">
                     <div class="table-responsive">
                         <table class="table table-hover js-basic-example dataTable">

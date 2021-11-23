@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-
+@include('msg.flash_message')
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12">

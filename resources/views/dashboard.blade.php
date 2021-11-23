@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('msg.flash_message')
 <div class="block-header">
     <div class="row clearfix">
         <div class="col-md-6 col-sm-12">

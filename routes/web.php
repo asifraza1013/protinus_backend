@@ -86,6 +86,7 @@ Route::group(['middleware' => ['dev_auth']], function () {
 
     Route::resource('earnings', 'DeveloperEarningsController');
     Route::get('developers/payout', 'DeveloperTransactionsController@index')->name('developer.payout.index');
+    Route::get('developers_payout', 'DeveloperTransactionsController@getDeveloperPayout')->name('get.developer.payout.index');
 
     Route::resource('developer', 'DeveloperController');
 });

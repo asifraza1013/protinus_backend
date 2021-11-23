@@ -27,4 +27,21 @@ class DeveloperTransactionsController extends Controller
             'transactions',
         ]));
     }
+
+    /**
+     * developer payouts
+     */
+    public function getDeveloperPayout()
+    {
+        $title = 'Developer Payouts';
+        $response = sendRequest('POST', config('api_path.get_developer_payout'));
+        if(!$response->status){
+            return redirect()->back()->with('error', $response->message);
+        }
+        $transactions = $response->data;
+        return view('developer.transactions.payouts', compact([
+            'title',
+            'transactions',
+        ]));
+    }
 }

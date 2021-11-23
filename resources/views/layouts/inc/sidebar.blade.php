@@ -45,8 +45,11 @@
                                     <a href="{{ route('developer.index') }}"><i class="fa fa-database"></i><span>Developers</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
+                                    <a href="{{ route('get.developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
                                 </li>
+                                {{-- <li>
+                                    <a href="{{ route('developer.payout.index') }}"><i class="fa fa-bars"></i><span>Payout</span></a>
+                                </li> --}}
                                 <li>
                                     <a href="{{ route('earnings.index') }}"><i class="fa fa-bars"></i><span>Earnings</span></a>
                                 </li>

@@ -24,6 +24,7 @@ return [
     'developer_transactions_list' => 'developerPayouts/getDeveloperPayout',
     'developer_earnings_list' => 'developerEarnings/getdeveloperEarning',
     'specific_developer_earnings_list' => 'developerEarnings/getdeveloperEarningById',
+    'get_developer_payout' => 'payouts/getPayout',
 
 
     'category_list' => 'categorys/getCategory',
